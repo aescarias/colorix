@@ -1,7 +1,7 @@
 from setuptools import setup
 import re
 
-with open('__init__.py') as f:
+with open('colorix\__init__.py') as f:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
 
 print(version)
@@ -21,5 +21,5 @@ setup(name="colorix",
       install_requires=requirements,
       python_requires=">=3.6",
       url="https://github.com/angelCarias/colorix",
-      download_url="https://github.com/angelCarias/colorix/archive/v0.1.0.tar.gz"
+      download_url="https://github.com/angelCarias/colorix/archive/v0.1.1.tar.gz"
       )
