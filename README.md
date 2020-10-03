@@ -9,6 +9,7 @@ The easiest way to install `colorix` is through PIP.
 
 ## Usage
 **NOTE: Results produced by colorix are not guaranteed to be accurate**
+
 Currently, `colorix` supports 3 color spaces; RGB, CMYK, and HEX.
 
 The following example demonstrates the standard use of `colorix`.
