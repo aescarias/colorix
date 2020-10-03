@@ -1,4 +1,4 @@
-from .colormodes import *
+from colorix.colormodes import *
 
 __title__ = 'colorix'
 __author__ = 'Tekgar'
