@@ -3,6 +3,7 @@ Colorix (which stands for 'Color Exchange') is a Python3 module designed for wor
 
 ## Installation
 The easiest way to install `colorix` is through PIP.
+
 `pip install colorix` or `pip3 install colorix`
 
 **Before installing**, ensure your Python version is 3.6 or above.

@@ -1,14 +1,13 @@
 """
 Colorix
 	A module for working with colors
-	
-	FILE:
-		colormodes.py
-	DESCRIPTION:
-		Color modes
 
+	FILE: 			colormodes.py
+	DESCRIPTION: 	Color modes
+	
 	Angel Carias. 2020.
 """
+import tkinter
 
 class ColorMode:
 	"""
@@ -35,7 +34,7 @@ class RGB(ColorMode):
 	
 	def toHex(self):
 		"""Convert RGB to Hex"""
-		return Hex('#{:02x}{:02x}{:02x}'.format(self.r, self., self.b))
+		return Hex('#{:02x}{:02x}{:02x}'.format(self.r, self.g, self.b))
 	
 
 	def toCMYK(self, precise=False):
@@ -59,13 +58,20 @@ class RGB(ColorMode):
 			return CMYK(c * cs, m * cs, y * cs, k * cs)
 		else:
 			return CMYK(round(c * cs), round(m * cs), round(y * cs), round(k * cs))
-
+		
+	def render(self):
+		"""Render current color"""
+		gui = tkinter.Tk(className="Color Render")
+		gui.geometry("200x200")
+		gui.configure(bg=self.toHex().hexval)
+		gui.mainloop()
 		 
 class Hex(ColorMode):
 	"""
 	Hex management class
 	"""
 	def __init__(self, hexval):
+		super(Hex, self).__init__()
 		self.hexval = hexval
 	
 	def toRGB(self):
@@ -92,7 +98,13 @@ class Hex(ColorMode):
 		# Convert RGB to CMYK
 		return RGB(r, g, b).toCMYK()
 
-		
+	def render(self):
+		"""Render current color"""
+		gui = tkinter.Tk(className="Color Render")
+		gui.geometry("200x200")
+		gui.configure(bg=self.hexval)
+		gui.mainloop()
+
 class CMYK(ColorMode):
 	"""
 	CMYK management class
@@ -131,3 +143,12 @@ class CMYK(ColorMode):
 			return RGB(r, g, b)
 		else:
 			return RGB(round(r), round(g), round(b))
+
+	def render(self):
+		"""Render current color"""
+		gui = tkinter.Tk(className="Color Render")
+		gui.geometry("200x200")
+		
+		gui.configure(bg=self.toHex().hexval)
+		gui.mainloop()
+		
