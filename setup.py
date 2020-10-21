@@ -22,5 +22,5 @@ setup(name="colorix",
       install_requires=requirements,
       python_requires=">=3.6",
       url="https://github.com/angelCarias/colorix",
-      download_url="https://github.com/angelCarias/colorix/archive/v0.1.2.tar.gz"
+      download_url="https://github.com/angelCarias/colorix/archive/v0.1.5.tar.gz"
       )

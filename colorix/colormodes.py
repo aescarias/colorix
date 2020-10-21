@@ -9,6 +9,7 @@ Colorix
 """
 import tkinter
 
+
 class ColorMode:
 	"""
 	Base class for color modes
@@ -24,18 +25,17 @@ class RGB(ColorMode):
 	"""
 	RGB management class
 	"""
-	def __init__(self, r, g, b):
+	def __init__(self, r: int, g: int, b: int):
 		super(RGB, self).__init__()
-		self.r = r
-		self.b = b
-		self.g = g
+		self.r = int(r)
+		self.b = int(b)
+		self.g = int(g)
 		
-		self.raw = (r, g, b)
+		self.raw = (self.r, self.g, self.b)
 	
 	def toHex(self):
 		"""Convert RGB to Hex"""
-		return Hex('#{:02x}{:02x}{:02x}'.format(self.r, self.g, self.b))
-	
+		return Hex(f'#{self.r:02x}{self.g:02x}{self.b:02x}')	
 
 	def toCMYK(self, precise=False):
 		"""Convert RGB to CMYK"""
@@ -59,18 +59,20 @@ class RGB(ColorMode):
 		else:
 			return CMYK(round(c * cs), round(m * cs), round(y * cs), round(k * cs))
 		
-	def render(self):
+	def render(self, width: int=200, height: int=200):
 		"""Render current color"""
 		gui = tkinter.Tk(className="Color Render")
-		gui.geometry("200x200")
+		gui.geometry(f"{width}x{height}")
+		
 		gui.configure(bg=self.toHex().hexval)
 		gui.mainloop()
-		 
+
+
 class Hex(ColorMode):
 	"""
 	Hex management class
 	"""
-	def __init__(self, hexval):
+	def __init__(self, hexval: str):
 		super(Hex, self).__init__()
 		self.hexval = hexval
 	
@@ -98,34 +100,36 @@ class Hex(ColorMode):
 		# Convert RGB to CMYK
 		return RGB(r, g, b).toCMYK()
 
-	def render(self):
+	def render(self, width: int=200, height: int=200):
 		"""Render current color"""
 		gui = tkinter.Tk(className="Color Render")
-		gui.geometry("200x200")
+		gui.geometry(f"{width}x{height}")
+		
 		gui.configure(bg=self.hexval)
 		gui.mainloop()
+
 
 class CMYK(ColorMode):
 	"""
 	CMYK management class
 	"""
-	def __init__(self, c, m, y, k):
+	def __init__(self, c: int, m: int, y: int, k: int):
 		super(CMYK, self).__init__()
 		
-		self.c = c
-		self.m = m
-		self.y = y
-		self.k = k
+		self.c = int(c)
+		self.m = int(m)
+		self.y = int(y)
+		self.k = int(k)
 		
-		self.raw = (c, m, y, k)
+		self.raw = (self.c, self.m, self.y, self.k)
 	
 	def toHex(self):
 		"""Convert CMYK to Hex"""
 		# Convert CMYK to RGB
-		rgb = CMYK(self.c, self.m, self.y, self.k).toRGB().raw
+		rgb = CMYK(self.c, self.m, self.y, self.k).toRGB()
 		
 		# Convert RGB to Hex
-		return Hex('#{:02x}{:02x}{:02x}'.format(*rgb))
+		return Hex(f'#{rgb.r:02x}{rgb.g:02x}{rgb.b:02x}')
 		
 	def toRGB(self, precise=False):
 		"""Convert CMYK to RGB"""
@@ -144,10 +148,10 @@ class CMYK(ColorMode):
 		else:
 			return RGB(round(r), round(g), round(b))
 
-	def render(self):
+	def render(self, width: int=200, height: int=200):
 		"""Render current color"""
 		gui = tkinter.Tk(className="Color Render")
-		gui.geometry("200x200")
+		gui.geometry(f"{width}x{height}")
 		
 		gui.configure(bg=self.toHex().hexval)
 		gui.mainloop()
